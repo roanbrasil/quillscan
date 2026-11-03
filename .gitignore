@@ -1,0 +1,8 @@
+/target
+/bench/out/*.tmp
+.venv
+__pycache__/
+*.pyc
+/models/
+/tests/fixtures/*.png
+/bench/out/

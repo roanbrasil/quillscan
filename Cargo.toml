@@ -1,0 +1,37 @@
+[package]
+name = "quillscan"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "OpenCV-free OCR pipeline in pure Rust: PP-OCR detection + recognition on the tract runtime, with hand-written contour tracing, box expansion and perspective cropping."
+repository = "https://github.com/roanbrasil/quillscan"
+keywords = ["ocr", "tract", "onnx", "computer-vision", "no-opencv"]
+categories = ["computer-vision", "multimedia::images"]
+
+[lib]
+name = "quillscan"
+path = "src/lib.rs"
+
+[[bin]]
+name = "quillscan"
+path = "src/main.rs"
+
+[dependencies]
+tract-onnx = "0.23"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png", "webp", "bmp", "tiff"] }
+rayon = "1.10"
+anyhow = "1"
+thiserror = "2"
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"
+
+[profile.bench]
+inherits = "release"

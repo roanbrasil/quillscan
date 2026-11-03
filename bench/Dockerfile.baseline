@@ -1,0 +1,7 @@
+# Baseline image: the OpenCV + ONNX Runtime pipeline (RapidOCR), for
+# comparing image size and cold start against the quillscan Dockerfile.
+FROM python:3.11-slim
+RUN pip install --no-cache-dir rapidocr onnxruntime opencv-python-headless
+COPY models /models
+COPY bench/baseline_rapidocr.py /baseline_rapidocr.py
+ENTRYPOINT ["python3", "/baseline_rapidocr.py", "--models", "/models"]
